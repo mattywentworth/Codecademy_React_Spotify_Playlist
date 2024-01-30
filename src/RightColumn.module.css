@@ -1,0 +1,10 @@
+.divWrapper {
+    background-color: darksalmon;
+    width: 50%;
+    height: 90vh;
+}
+
+.playlistHeading {
+    display: flex;
+    justify-content:center;
+}

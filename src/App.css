@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .App-logo {
@@ -35,4 +37,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Added by Matty */
+
+.Main {
+  display: flex;
 }

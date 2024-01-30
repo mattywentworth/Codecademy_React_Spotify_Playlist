@@ -1,0 +1,30 @@
+.divWrapper {
+    background-color: lightpink;
+    width: 90%;
+    height: 90%;
+    margin: 0 auto;
+    overflow: scroll;
+}
+
+.divListWrapper {
+    margin-bottom: 2rem;
+}
+
+.divListItemWrapper {
+    display: flex;
+    justify-content: space-between;
+    position: relative; /* Why couldn't I just set margin to separate these div list items from the divWrapper? */
+    top: 1rem;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    background-color: lightsalmon;
+}
+
+.button {
+    background-color: green;
+    border: none;
+    height: 1rem;
+    width: 1rem;
+}
