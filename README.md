@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# Spotify Playlist Creator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Description
+This project was a part of Codecademy's Full-Stack Career Path coursework. The purpose was to build on prior HTML, CSS, and JS coursework while practicing recent lessons on React.
 
-In the project directory, you can run:
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Primary Requirements
+-Search field that makes a GET request to Spotify's API
+-Results section that displays the search results
+-Name field to name the playlist
+-Playlist section to list the songs the user has added to their new playlist
+-Ability to delete songs already added to the playlist
+-Save button that makes a PUSH request to save the playlist in the user's Spotify account
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Additional Features I May Implement
+-Save the name of the playlist and rename the playlist before saving the playlist
+-Select multiple songs to delete
+-Select all songs to delete
+-Stats to display things like the number of songs added and most prevalent artist
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies
 
-### `npm run build`
+-React
+-HTML
+-CSS
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Criticism
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+I kept in mind the programming pattern of having presentational components and container components, so I think I properly constructed all of the presentational components to react to state rather than controlling it. But I may have been able to better structure container components. This may be a simple enough project that it's ok that I handled all hooks (in this case, only useState and useEffect) in the App component, but I'd probably need to approach it differently with a more complex project.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+I thought it would be a good idea to create a few simple initial components with simple CSS to get a rough outline of the app. Then I layered additional components and functionality within the simple design. I'm satisfied enough with the product, but I think I'd be better off thinking through the requirements and making a sketch of an app before writing the code in order to reduce the likelihood of complicated refactoring.
 
-### `npm run eject`
+## Challenges While Building
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+A concept I've learned about but haven't practiced or use much is using the logical not operator. Not being well-acquainted with how to put this to use in different situations, I struggled a lot when building out the functionality to delete tracks from the playlist. I comfortably created and updated state for the tracks on the playlist and the tracks that were selected to be deleted from the playlist, but it took me an inordinate amount of time to discover how to filter the ...prev playlist state to only include tracks not in the tracksToDelete state array. I was structuring the .filter callback to be "track => tracksToDelete.includes(!track)," even though the logic of it didn't feel quite right. Eventually I got the delete function "working" in the sense that it wasn't returning an error, but it was deleting every track on the playlist rather than only the tracks selected to delete. Then I decided to Google "javascript array doesnotinclude," knowing there isn't a .doesNotInclude() method, and immediately got what I was looking for - include the logical not at the beginning of the filter condition.

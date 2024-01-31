@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import LeftColumn from './LeftColumn';
 import RightColumn from './RightColumn';
@@ -11,10 +11,30 @@ function App() {
   const [editedPlaylistName, setEditedPlaylistName] = useState('');
   const [savedPlaylistName, setSavedPlaylistName] = useState('');
   const [editing, setEditing] = useState(false);
+  const [tracksToDelete, setTracksToDelete] = useState([]);
   //I think there will be an issue of needing to reset the value of 'input' to an empty string after form is submitted. It needs to equal only what is typed in input field
   //Add a button to sync playlist with Spotify
+  //Add aria labels for accessibility
 
 
+  //Handling a manually typed entry to add to the playlist and adding it to the playlist
+  const handleInputChange = (e) => {
+    setInput(e.target.value);
+  }
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (playlistTracks.includes(input) == false) {
+      setPlaylistTracks((prev) => [input, ...prev]);
+      setInput('');
+    } else {
+      //alert(`${input} is already on your playlist and cannot be added again.`)
+      document.getElementById('test-header').innerHTML = `${input} is already on your playlist.`;
+    }
+    
+  }
+
+  //Handling naming and renaming the playlist
   const handleEditedPlaylistNameChange = (e) => {
     setEditedPlaylistName(e.target.value);
   }
@@ -29,18 +49,55 @@ function App() {
     };
   }
 
-
-
-  const handleInputChange = (e) => {
-    setInput(e.target.value);
-  }
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    setPlaylistTracks((prev) => [input, ...prev]);
-    setInput('');
-  }
+  //Handling deletions of tracks on the playlist
   
+  const handleSelectionForDeletion = (e) => {
+    if(tracksToDelete.includes(e.target.id) == false) {
+      setTracksToDelete((prev) => [...prev, e.target.id]);
+    } else {
+      setTracksToDelete((prev) => prev.filter(track => e.target.id != track));
+    };
+  }
+
+  const handleAbandonDelete = () => {
+    setTracksToDelete([]);
+  }
+
+  //Need to check each value in the ...prev array and include it in the new array if it is not a value in tracksToDelete
+  const handleDeletion = () => {
+    setPlaylistTracks((prev) => prev.filter((track => !tracksToDelete.includes(track)))
+    /*setPlaylistTracks((prev) => {
+      for (let i of prev) {
+        if (tracksToDelete.includes(!i)) {
+
+        };
+      }*/
+    );
+      //return ['test', ...prev];
+    //);
+    setTracksToDelete([]);
+  }
+
+  const numOfTracksToDelete = tracksToDelete.length;
+
+  //This is functioning properly, but do i have to use useEffet to change the color of the delete button for each track?
+  useEffect(() => {
+    
+    for (const track of playlistTracks) {
+      if (tracksToDelete.includes(track) == true) {
+        document.getElementById(track).style.backgroundColor = 'red';
+      } else {
+        document.getElementById(track).style.backgroundColor = 'green';
+      }
+    };
+    if (playlistTracks.length >= 0 && tracksToDelete.length == 0) {
+      document.getElementById('delete-songs-div').style.display = 'none';
+    } else if (playlistTracks.length > 0 && tracksToDelete.length != 0) {
+      document.getElementById('delete-songs-div').style.display = 'flex';
+    };
+  }, [tracksToDelete])
+
+
   return (
     <div className="App">
       <header>
@@ -48,7 +105,7 @@ function App() {
       </header>
       <main className="Main">
         <LeftColumn handleInputChange={handleInputChange} stateInput={input} handleFormSubmit={handleFormSubmit}/>
-        <RightColumn stateSavedPlaylistName={savedPlaylistName} handleEditedPlaylistNameChange={handleEditedPlaylistNameChange} handlePlaylistNameFormSubmit={handlePlaylistNameFormSubmit} statePlaylistTracks={playlistTracks} truthyEditing={truthyEditing} stateEditing={editing}/>
+        <RightColumn stateSavedPlaylistName={savedPlaylistName} handleEditedPlaylistNameChange={handleEditedPlaylistNameChange} handlePlaylistNameFormSubmit={handlePlaylistNameFormSubmit} statePlaylistTracks={playlistTracks} truthyEditing={truthyEditing} stateEditing={editing} handleSelectionForDeletion={handleSelectionForDeletion} numOfTracksToDelete={numOfTracksToDelete} handleDeletion={handleDeletion} handleAbandonDelete={handleAbandonDelete} />
       </main>
     </div>
   );

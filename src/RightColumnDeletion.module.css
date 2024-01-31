@@ -1,0 +1,8 @@
+.divWrapper {
+    display: flex;
+    justify-content: center;
+    background-color: lightpink;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
