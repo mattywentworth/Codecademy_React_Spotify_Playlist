@@ -8,25 +8,25 @@ This project was a part of Codecademy's Full-Stack Career Path coursework. The p
 ## Features
 
 Primary Requirements
--Search field that makes a GET request to Spotify's API
--Results section that displays the search results
--Name field to name the playlist
--Playlist section to list the songs the user has added to their new playlist
--Ability to delete songs already added to the playlist
--Save button that makes a PUSH request to save the playlist in the user's Spotify account
+- Search field that makes a GET request to Spotify's API
+- Results section that displays the search results
+- Name field to name the playlist
+- Playlist section to list the songs the user has added to their new playlist
+- Ability to delete songs already added to the playlist
+- Save button that makes a PUSH request to save the playlist in the user's Spotify account
 
 Additional Features I May Implement
--Save the name of the playlist and rename the playlist before saving the playlist
--Select multiple songs to delete
--Select all songs to delete
--Stats to display things like the number of songs added and most prevalent artist
+- Save the name of the playlist and rename the playlist before saving the playlist
+- Select multiple songs to delete
+- Select all songs to delete
+- Stats to display things like the number of songs added and most prevalent artist
 
 
 ## Technologies
 
--React
--HTML
--CSS
+- React
+- HTML
+- CSS
 
 ## Criticism
 
@@ -37,3 +37,5 @@ I thought it would be a good idea to create a few simple initial components with
 ## Challenges While Building
 
 A concept I've learned about but haven't practiced or use much is using the logical not operator. Not being well-acquainted with how to put this to use in different situations, I struggled a lot when building out the functionality to delete tracks from the playlist. I comfortably created and updated state for the tracks on the playlist and the tracks that were selected to be deleted from the playlist, but it took me an inordinate amount of time to discover how to filter the ...prev playlist state to only include tracks not in the tracksToDelete state array. I was structuring the .filter callback to be "track => tracksToDelete.includes(!track)," even though the logic of it didn't feel quite right. Eventually I got the delete function "working" in the sense that it wasn't returning an error, but it was deleting every track on the playlist rather than only the tracks selected to delete. Then I decided to Google "javascript array doesnotinclude," knowing there isn't a .doesNotInclude() method, and immediately got what I was looking for - include the logical not at the beginning of the filter condition.
+
+This project was a good reminder that I need to read more about promises, async functions, and handling API requests. Those are all things I can figure out, but I'd like to rely less on copying, pasting, and tweaking existing code and being able to more quickly understand what's going on and write the code myself (especially API requests with fetch, headers, try/catch statements). While I was struggling to get the details from Spotify to render properly in the app, there was a long period where I overlooked simple sytax missing from my JSX that was preventing the array from being mapped over properly.

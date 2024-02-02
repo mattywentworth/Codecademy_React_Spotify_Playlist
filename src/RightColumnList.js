@@ -11,14 +11,7 @@ export default function RightColumnList( {statePlaylistTracks, children, handleS
         <div className={styles.divWrapper}>
             {children}
             <div className={styles.divListWrapper} id="playlist-tracks">
-                {statePlaylistTracks.map(track => {
-                    return (
-                            <div className={styles.divListItemWrapper}>
-                                <h4>{track}</h4>
-                                <button className={styles.button} id={track} onClick={handleSelectionForDeletion}></button>
-                            </div>
-                    );
-                })}
+                <p>placeholder</p>
             </div>
         </div>
     );

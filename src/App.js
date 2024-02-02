@@ -3,6 +3,15 @@ import Header from './Header';
 import LeftColumn from './LeftColumn';
 import RightColumn from './RightColumn';
 import './App.css';
+import spotifyApiCall from './SpotifyAPICall';
+//import { sampleTracksArray } from './SampleTracksArray'; Putting this in place may be a waste of time. Just figure out the API work
+
+/*
+Must do items:
+-Add a button to sync playlist with Spotify
+-Add aria labels for accessibility
+-Properly construct error message of some kind when user tries to add a track already on the playlist
+*/
 
 function App() {
   
@@ -12,9 +21,9 @@ function App() {
   const [savedPlaylistName, setSavedPlaylistName] = useState('');
   const [editing, setEditing] = useState(false);
   const [tracksToDelete, setTracksToDelete] = useState([]);
+  const [apiReturn, setApiReturn] = useState([]);
   //I think there will be an issue of needing to reset the value of 'input' to an empty string after form is submitted. It needs to equal only what is typed in input field
-  //Add a button to sync playlist with Spotify
-  //Add aria labels for accessibility
+  
 
 
   //Handling a manually typed entry to add to the playlist and adding it to the playlist
@@ -27,12 +36,21 @@ function App() {
     if (playlistTracks.includes(input) == false) {
       setPlaylistTracks((prev) => [input, ...prev]);
       setInput('');
-    } else {
+    } else {//useEffect will be important here, because this message will need to react to {input} changing
       //alert(`${input} is already on your playlist and cannot be added again.`)
       document.getElementById('test-header').innerHTML = `${input} is already on your playlist.`;
+      //setTimeout(() => document.getElementById('test-header').style.display = 'none', 3000);//This only works on the first render? Because useEffect is needed?
     }
     
   }
+
+  //Handling calling Spotify's API with a search term
+  const handleFormSubmitAPI = async (e) => {
+    e.preventDefault();
+    const spotifyApiReturn = await spotifyApiCall(input);
+    setApiReturn(spotifyApiReturn);
+  }
+
 
   //Handling naming and renaming the playlist
   const handleEditedPlaylistNameChange = (e) => {
@@ -104,7 +122,7 @@ function App() {
         <Header />
       </header>
       <main className="Main">
-        <LeftColumn handleInputChange={handleInputChange} stateInput={input} handleFormSubmit={handleFormSubmit}/>
+        <LeftColumn handleInputChange={handleInputChange} stateInput={input} handleFormSubmit={handleFormSubmit} handleFormSubmitAPI={handleFormSubmitAPI} apiReturn={apiReturn}/>
         <RightColumn stateSavedPlaylistName={savedPlaylistName} handleEditedPlaylistNameChange={handleEditedPlaylistNameChange} handlePlaylistNameFormSubmit={handlePlaylistNameFormSubmit} statePlaylistTracks={playlistTracks} truthyEditing={truthyEditing} stateEditing={editing} handleSelectionForDeletion={handleSelectionForDeletion} numOfTracksToDelete={numOfTracksToDelete} handleDeletion={handleDeletion} handleAbandonDelete={handleAbandonDelete} />
       </main>
     </div>

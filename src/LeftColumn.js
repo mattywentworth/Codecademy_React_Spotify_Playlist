@@ -9,12 +9,12 @@ import LeftColumnSearchResults from './LeftColumnSearchResults';
 
 //When you add the api call, set the results to show in left column and set overflow of left colum to scroll OR better yet paginate it?
 
-export default function LeftColumn( {handleInputChange, stateInput, handleFormSubmit} ) {
+export default function LeftColumn( {handleInputChange, stateInput, handleFormSubmit, handleFormSubmitAPI, apiReturn} ) {
     return (
         <div className={styles.divWrapper}>
             <h2>Explore Spotify's Catalog</h2>
-            <LeftColumnForm handleInputChange={handleInputChange} stateInput={stateInput} handleFormSubmit={handleFormSubmit}>
-                <LeftColumnSearchResults />
+            <LeftColumnForm handleInputChange={handleInputChange} stateInput={stateInput} handleFormSubmit={handleFormSubmit} handleFormSubmitAPI={handleFormSubmitAPI}>
+                <LeftColumnSearchResults apiReturn={apiReturn}/>
             </LeftColumnForm>
         </div>
     );
