@@ -11,7 +11,20 @@ export default function RightColumnList( {statePlaylistTracks, children, handleS
         <div className={styles.divWrapper}>
             {children}
             <div className={styles.divListWrapper} id="playlist-tracks">
-                <p>placeholder</p>
+                {statePlaylistTracks.map((track) => {
+                    return (
+                        <div className={styles.track} key={track.idTrack}>
+                            <img src={track.imgAlbum} className={styles.img}/>
+                            <div className={styles.trackInfo}>
+                                <h4>Track: {track.nameTrack}</h4>
+                                <h5>Artist: {track.nameArtist}</h5>
+                                <h6>Album: {track.nameAlbum}</h6>
+                            </div>
+                            <button className={styles.addButton} >Add</button>
+                            
+                        </div>
+                    )
+                })}
             </div>
         </div>
     );

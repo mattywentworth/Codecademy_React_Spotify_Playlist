@@ -4,13 +4,13 @@
 //it will be written eventually as a useEffect function with [input] as the dependency array
 const urlForTerminalSetup = "grant_type=client_credentials&client_id=954d475f59ed4224ac3b1c9ee5230229&client_secret=5ce1374838084874a5e8e3fdfa7aff6d"
 
-const accessToken = "BQCCvF8ZaoUvxpcruQMBH0xGIY1VJBXuFJA1RahjkdSWqgoWdr-QN2a2BK7sldyBi3f_FvxMjFD7QrjNHdp2jV-C3KlG4QnfLetOhiCcMeX7LhdvkjY"
+const accessToken = "BQB30fgWob-IMkpJ4h3swJPQJuomQ3gXC71H45dS5-D9qsVOGnIy-moaN-i49t3genf1swztMeFETQyLLIYnsAt8tTVtC0D3q_jrqYHR2Z_uxQeh_-Y"
 
 async function spotifyApiCall(searchTerm) {
     const apiURL = 'https://api.spotify.com/v1';
     const endpointSearch = "/search?q=";
     const typeTrack = '&type=track';
-    const limit = '&limit=2'
+    const limit = '&limit=20'
     //const artistKey = '4AF9rlxnZLtau1tmBTzqaj';
     const finishedURL = `${apiURL}${endpointSearch}${searchTerm}${typeTrack}${limit}`;
     try {

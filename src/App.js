@@ -31,7 +31,8 @@ function App() {
     setInput(e.target.value);
   }
 
-  const handleFormSubmit = (e) => {
+  //Needs to be deleted at some point
+  /*const handleFormSubmit = (e) => {
     e.preventDefault();
     if (playlistTracks.includes(input) == false) {
       setPlaylistTracks((prev) => [input, ...prev]);
@@ -42,7 +43,7 @@ function App() {
       //setTimeout(() => document.getElementById('test-header').style.display = 'none', 3000);//This only works on the first render? Because useEffect is needed?
     }
     
-  }
+  }*/
 
   //Handling calling Spotify's API with a search term
   const handleFormSubmitAPI = async (e) => {
@@ -51,6 +52,12 @@ function App() {
     setApiReturn(spotifyApiReturn);
   }
 
+  //Handling adding a song result to the playlist and preventing a song from being added twice
+  const handleAddToPlaylistClick = (e) => {
+    if (playlistTracks.find(track => track.id == e.target.getAttribute('idtrack')) == undefined) {
+      setPlaylistTracks((prev) => [{id: e.target.getAttribute('idtrack'), nameTrack: e.target.getAttribute('nametrack'), nameAlbum: e.target.getAttribute('namealbum'), nameArtist: e.target.getAttribute('nameartist'), imgAlbum: e.target.getAttribute('imgalbum')}, ...prev]);
+    };
+  }
 
   //Handling naming and renaming the playlist
   const handleEditedPlaylistNameChange = (e) => {
@@ -122,7 +129,7 @@ function App() {
         <Header />
       </header>
       <main className="Main">
-        <LeftColumn handleInputChange={handleInputChange} stateInput={input} handleFormSubmit={handleFormSubmit} handleFormSubmitAPI={handleFormSubmitAPI} apiReturn={apiReturn}/>
+        <LeftColumn handleInputChange={handleInputChange} stateInput={input} handleFormSubmitAPI={handleFormSubmitAPI} apiReturn={apiReturn} handleAddToPlaylistClick={handleAddToPlaylistClick}/>
         <RightColumn stateSavedPlaylistName={savedPlaylistName} handleEditedPlaylistNameChange={handleEditedPlaylistNameChange} handlePlaylistNameFormSubmit={handlePlaylistNameFormSubmit} statePlaylistTracks={playlistTracks} truthyEditing={truthyEditing} stateEditing={editing} handleSelectionForDeletion={handleSelectionForDeletion} numOfTracksToDelete={numOfTracksToDelete} handleDeletion={handleDeletion} handleAbandonDelete={handleAbandonDelete} />
       </main>
     </div>
