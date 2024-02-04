@@ -77,10 +77,10 @@ function App() {
   //Handling deletions of tracks on the playlist
   
   const handleSelectionForDeletion = (e) => {
-    if(tracksToDelete.includes(e.target.id) == false) {
-      setTracksToDelete((prev) => [...prev, e.target.id]);
+    if(/*tracksToDelete.includes(e.target.id) == false*/ tracksToDelete.find(track => track == e.target.key) == undefined ) {
+      setTracksToDelete((prev) => [...prev, e.target.id /*e.target.id*/]);
     } else {
-      setTracksToDelete((prev) => prev.filter(track => e.target.id != track));
+      setTracksToDelete((prev) => prev.filter(track => e.target.key != track.id));
     };
   }
 
@@ -90,7 +90,7 @@ function App() {
 
   //Need to check each value in the ...prev array and include it in the new array if it is not a value in tracksToDelete
   const handleDeletion = () => {
-    setPlaylistTracks((prev) => prev.filter((track => !tracksToDelete.includes(track)))
+    setPlaylistTracks((prev) => prev.filter((track => tracksToDelete.find(trackToDelete => trackToDelete == track.id) == undefined  /*!tracksToDelete.includes(track)*/))
     /*setPlaylistTracks((prev) => {
       for (let i of prev) {
         if (tracksToDelete.includes(!i)) {
@@ -106,6 +106,7 @@ function App() {
   const numOfTracksToDelete = tracksToDelete.length;
 
   //This is functioning properly, but do i have to use useEffet to change the color of the delete button for each track?
+  /*
   useEffect(() => {
     
     for (const track of playlistTracks) {
@@ -121,7 +122,7 @@ function App() {
       document.getElementById('delete-songs-div').style.display = 'flex';
     };
   }, [tracksToDelete])
-
+  */
 
   return (
     <div className="App">
