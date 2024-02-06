@@ -1,6 +1,35 @@
 .divWrapper {
     margin: 0;
-    background-color: cornflowerblue;
+    display: flex;
+    align-items: center;
     height: 10vh;
     width: 100%;
+    background-color: black;
+    /*border-bottom: 2px solid gray;*/
+}
+
+.divLeft {
+    width: 20%;
+}
+
+.divCenter {
+    width: 60%;
+}
+
+.divRight {
+    width: 20%;
+}
+
+.button {
+    display: default; /* Change to none and have js handle dislay: default or whatever when the playlist has a name and when at least one song has been added */
+    background-color: #1FD563;
+    border: 2px solid #1FD563;
+    color: black;
+    font-size: 1.25rem;
+    padding: 0.5rem;
+}
+
+.button:hover {
+    background-color: white;
+    border: 2px solid white;
 }

@@ -18,8 +18,8 @@ export default function RightColumnDeletion( {numOfTracksToDelete, handleDeletio
     return (
         <div className={styles.divWrapper} id="delete-songs-div">
             <h3>{trackDeletionMessage}</h3>
-            <button onClick={handleDeletion}>Yes</button>
-            <button onClick={handleAbandonDelete}>No</button>
+            <button className={styles.button} onClick={handleDeletion}>Yes</button>
+            <button className={styles.button} onClick={handleAbandonDelete}>No</button>
         </div>
     )
 }

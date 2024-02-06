@@ -1,5 +1,11 @@
 .divWrapper {
-    background-color: darkseagreen;
     height: 90vh;
     width: 50%;
+    /*border-top: 1px solid gray;*/
+    /*border-right: 1px solid black;*/
+}
+
+.leftColumnHeader {
+    margin: 1rem;
+    height: 6vh;
 }

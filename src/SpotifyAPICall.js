@@ -4,7 +4,7 @@
 //it will be written eventually as a useEffect function with [input] as the dependency array
 const urlForTerminalSetup = "grant_type=client_credentials&client_id=954d475f59ed4224ac3b1c9ee5230229&client_secret=5ce1374838084874a5e8e3fdfa7aff6d"
 
-const accessToken = "BQDrCAVsJMDTQA_JGvYyFi6g_NyogAtw13k4COKlRdEe0lqZdAtkjB-98zgSjkpEDSS2nBMdfYM5cmW39T3ON1R-ZMGTxPJYa2wFfBp1kq-eXOPZJnc"
+const accessToken = "BQAav5P7SHRV45BEZonDhSUDfFdn2drIkVx934hj9dmP5Eu4Nnq8Pb-Xk0PoSyzSwEI0Rjw6NnzzeDEIa91i0FRWPymQhP9mzsLf3aN8BN68xYByr7c"
 
 async function spotifyApiCall(searchTerm) {
     const apiURL = 'https://api.spotify.com/v1';

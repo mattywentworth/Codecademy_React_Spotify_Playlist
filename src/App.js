@@ -77,10 +77,10 @@ function App() {
   //Handling deletions of tracks on the playlist
   
   const handleSelectionForDeletion = (e) => {
-    if(/*tracksToDelete.includes(e.target.id) == false*/ tracksToDelete.find(track => track == e.target.key) == undefined ) {
+    if(!tracksToDelete.includes(e.target.id) /*tracksToDelete.find(track => track) == undefined*/ ) {
       setTracksToDelete((prev) => [...prev, e.target.id /*e.target.id*/]);
     } else {
-      setTracksToDelete((prev) => prev.filter(track => e.target.key != track.id));
+      setTracksToDelete((prev) => prev.filter(track => e.target.id != track));
     };
   }
 
@@ -106,14 +106,14 @@ function App() {
   const numOfTracksToDelete = tracksToDelete.length;
 
   //This is functioning properly, but do i have to use useEffet to change the color of the delete button for each track?
-  /*
+  
   useEffect(() => {
     
     for (const track of playlistTracks) {
-      if (tracksToDelete.includes(track) == true) {
-        document.getElementById(track).style.backgroundColor = 'red';
+      if (tracksToDelete.includes(track.id) == true) {
+        document.getElementById(track.id).style.backgroundColor = 'red';
       } else {
-        document.getElementById(track).style.backgroundColor = 'green';
+        document.getElementById(track.id).style.backgroundColor = 'black';
       }
     };
     if (playlistTracks.length >= 0 && tracksToDelete.length == 0) {
@@ -122,12 +122,20 @@ function App() {
       document.getElementById('delete-songs-div').style.display = 'flex';
     };
   }, [tracksToDelete])
-  */
+
+  useEffect(() => {
+    if (playlistTracks.length > 0 && savedPlaylistName) {
+      document.getElementById('test-header').style.display = 'block';
+    } else {
+      document.getElementById('test-header').style.display = 'none';
+    };
+  })
+  
 
   return (
     <div className="App">
       <header>
-        <Header />
+        <Header statePlaylistTracks={playlistTracks} statePlaylistName={savedPlaylistName}/>
       </header>
       <main className="Main">
         <LeftColumn handleInputChange={handleInputChange} stateInput={input} handleFormSubmitAPI={handleFormSubmitAPI} apiReturn={apiReturn} handleAddToPlaylistClick={handleAddToPlaylistClick}/>

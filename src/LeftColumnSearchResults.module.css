@@ -10,8 +10,9 @@
     width: 90%;
     margin: 1rem;
     padding: 0.5rem;
-    background-color: seagreen;
+    background-color: black;
     text-align: left;
+    border: 2px solid gray;
 }
 
 .img {
@@ -28,11 +29,16 @@
     background-color: inherit;
     border: inherit;
     font-size: 1.5rem;
-    border: 2px solid black;
+    border: 2px solid white;
+    color: white;
 }
 
 .addButton:hover {
-    background-color: green;
-    color: white;
-    border-color: white;
+    background-color: #1FD563;
+    color: black;
+    border: 2px solid #1FD563;
+}
+
+.addButton:active {
+    border: 0px solid #1FD563;
 }

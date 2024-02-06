@@ -20,7 +20,7 @@ export default function RightColumnList( {statePlaylistTracks, children, handleS
                                 <h5>Artist: {track.nameArtist}</h5>
                                 <h6>Album: {track.nameAlbum}</h6>
                             </div>
-                            <button onClick={handleSelectionForDeletion} className={styles.addButton} id={track.id}>-</button>
+                            <button onClick={handleSelectionForDeletion} className={styles.removeButton} id={track.id}>-</button>
                         </div>
                     )
                 })}

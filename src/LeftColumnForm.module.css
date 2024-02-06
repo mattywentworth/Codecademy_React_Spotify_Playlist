@@ -1,5 +1,5 @@
 .divWrapper {
-    background-color: lightseagreen;
+    background-color: transparent;
     width: 90%;
     height: 90%;
     margin: 0 auto;
@@ -11,7 +11,7 @@
     position: sticky;
     top: 0;
     z-index: 1;
-    background-color: lightseagreen;
+    background-color: transparent;
 }
 
 .input {
@@ -26,11 +26,16 @@
 
 .button {
     width: 20%;
-    border: 2px black solid;
-    background-color: black;
-    color: white;
+    border: 2px solid white;
+    background-color: white;
+    color: black;
     font-size: 1rem;
     line-height: 1.5;
+}
+
+.button:hover {
+    background-color: #1FD563;
+    border: 2px solid #1FD563;
 }
 
 /* Come back to write css for hover and active states */

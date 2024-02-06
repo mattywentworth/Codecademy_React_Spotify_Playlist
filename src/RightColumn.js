@@ -17,10 +17,10 @@ export default function RightColumn( {statePlaylistTracks, stateSavedPlaylistNam
         if (stateSavedPlaylistName == '') {
             playlistHeading = (
                 <div className={styles.playlistHeading}>
-                    <h2>Name Your Playlist</h2>
+                    <h2>Name Your Playlist:</h2>
                     <form onSubmit={handlePlaylistNameFormSubmit}>
-                        <input type="text" onChange={handleEditedPlaylistNameChange} value={stateEditedPlaylistName}></input>
-                        <button type="submit">Save Name</button>
+                        <input className={styles.input} type="text" onChange={handleEditedPlaylistNameChange} value={stateEditedPlaylistName} placeholder="e.g. 'Road Trip'"></input>
+                        <button className={styles.button} type="submit">Save Name</button>
                     </form>
                 </div>
             );
@@ -35,10 +35,10 @@ export default function RightColumn( {statePlaylistTracks, stateSavedPlaylistNam
     } else {
         playlistHeading = (
             <div className={styles.playlistHeading}>
-                <h2>Rename Your Playlist</h2>
+                <h2>Rename Your Playlist:</h2>
                 <form onSubmit={handlePlaylistNameFormSubmit}>
-                    <input type="text" onChange={handleEditedPlaylistNameChange} value={stateEditedPlaylistName}></input>
-                    <button type="submit">Save Name</button>
+                    <input className={styles.input} type="text" onChange={handleEditedPlaylistNameChange} value={stateEditedPlaylistName}></input>
+                    <button className={styles.button} type="submit">Save Name</button>
                 </form>
             </div>
         );

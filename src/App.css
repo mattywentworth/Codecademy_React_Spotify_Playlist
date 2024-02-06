@@ -2,6 +2,23 @@
   text-align: center;
   width: 100%;
   box-sizing: border-box;
+  color: #1FD563;
+  /*background-color: black;*/
+  
+}
+
+.App::before {
+  content: "";
+  background-image: url('https://images.inc.com/uploaded_files/image/1920x1080/getty_506068552_298876.jpg');
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /*background-color: rgba(0,0,0,0.9);*/
+  box-shadow: inset 0 0 0 1000px rgba(0,0,0,.9);
+  z-index: -3;
 }
 
 .App-logo {

@@ -1,8 +1,25 @@
 .divWrapper {
     display: flex;
     justify-content: center;
-    background-color: lightpink;
+    align-items: center;
+    background-color: transparent;
     position: sticky;
     top: 0;
     z-index: 1;
+    margin: 1rem;
+}
+
+.button {
+    width: 75px;
+    background-color: white;
+    color: black;
+    border: 2px solid white;
+    margin: 0 0.5rem;
+    padding: 0.25rem 0;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #1FD563;
+    border: 2px solid #1FD563;
 }
