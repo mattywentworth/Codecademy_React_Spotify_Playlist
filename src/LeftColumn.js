@@ -12,10 +12,13 @@ import LeftColumnSearchResults from './LeftColumnSearchResults';
 export default function LeftColumn( {handleInputChange, stateInput, handleFormSubmitAPI, apiReturn, handleAddToPlaylistClick} ) {
     return (
         <div className={styles.divWrapper}>
-            <h2 className={styles.leftColumnHeader}>Explore Spotify's Catalog</h2>
-            <LeftColumnForm handleInputChange={handleInputChange} stateInput={stateInput} handleFormSubmitAPI={handleFormSubmitAPI}>
+            <div className={styles.leftColumnHeader}>
+                <h2>Explore Spotify's Catalog</h2>
+                <LeftColumnForm handleInputChange={handleInputChange} stateInput={stateInput} handleFormSubmitAPI={handleFormSubmitAPI}></LeftColumnForm>
+            </div>
+            <div className={styles.divWrapperSearchResults}>
                 <LeftColumnSearchResults apiReturn={apiReturn} handleAddToPlaylistClick={handleAddToPlaylistClick}/>
-            </LeftColumnForm>
+            </div>
         </div>
     );
 }

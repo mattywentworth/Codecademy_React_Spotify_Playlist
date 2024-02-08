@@ -16,9 +16,20 @@ export default function RightColumnList( {statePlaylistTracks, children, handleS
                         <div className={styles.track} >
                             <img src={track.imgAlbum} className={styles.img}/>
                             <div className={styles.trackInfo}>
-                                <h4>Track: {track.nameTrack}</h4>
-                                <h5>Artist: {track.nameArtist}</h5>
-                                <h6>Album: {track.nameAlbum}</h6>
+                                <table>
+                                    <tr>
+                                        <td className={styles.ttitle}>Track:</td>
+                                        <td className={styles.tdetail}>{track.nameTrack}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className={styles.ttitle}>Artist:</td>
+                                        <td className={styles.tdetail}>{track.nameArtist}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className={styles.ttitle}>Album:</td>
+                                        <td className={styles.tdetail}>{track.nameAlbum}</td>
+                                    </tr>
+                                </table>
                             </div>
                             <button onClick={handleSelectionForDeletion} className={styles.removeButton} id={track.id}>-</button>
                         </div>

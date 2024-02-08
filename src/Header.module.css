@@ -22,14 +22,16 @@
 
 .button {
     display: default; /* Change to none and have js handle dislay: default or whatever when the playlist has a name and when at least one song has been added */
-    background-color: #1FD563;
+    background-color: inherit;
     border: 2px solid #1FD563;
-    color: black;
+    color: #1FD563;
+    border-radius: 50px;
     font-size: 1.25rem;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
 }
 
 .button:hover {
-    background-color: white;
-    border: 2px solid white;
+    background-color: #1FD563;
+    border: 2px solid #1FD563;
+    color: black;
 }

@@ -1,27 +1,41 @@
 .divWrapper {
     width: 100%;
+    height: 80vh;
     z-index: 0;
+    overflow: scroll;
 }
 
 .track {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
-    margin: 1rem;
+    width: 80%;
+    margin: 1rem auto;
     padding: 0.5rem;
     background-color: black;
     text-align: left;
-    border: 2px solid gray;
+    border: 2px solid darkslategrey;
+    color: lightgray;
 }
 
 .img {
-    width: 10%;
+    width: 12%;
 }
 
 .trackInfo {
     width: 80%;
     padding: 0 0.5rem;
+    margin-left: 1.5rem;
+}
+
+.ttitle {
+    font-weight: bold;
+    text-align: right;
+}
+
+.tdetail {
+    text-align: left;
+    padding-left: 0.5rem;
 }
 
 .addButton {

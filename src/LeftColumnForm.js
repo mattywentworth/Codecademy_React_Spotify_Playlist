@@ -9,7 +9,6 @@ export default function LeftColumnForm( {handleInputChange, stateInput, children
                 <input onChange={handleInputChange} value={stateInput} type="text" id="song search" name="song-search" placeholder="Millions of tracks available..." className={styles.input}></input>
                 <button type="submit" className={styles.button}>Search</button>
             </form>
-            {children}
         </div>
     )
 }

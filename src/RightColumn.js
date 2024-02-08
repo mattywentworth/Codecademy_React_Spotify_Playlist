@@ -17,8 +17,8 @@ export default function RightColumn( {statePlaylistTracks, stateSavedPlaylistNam
         if (stateSavedPlaylistName == '') {
             playlistHeading = (
                 <div className={styles.playlistHeading}>
-                    <h2>Name Your Playlist:</h2>
-                    <form onSubmit={handlePlaylistNameFormSubmit}>
+                    <h2>Name Your Playlist</h2>
+                    <form onSubmit={handlePlaylistNameFormSubmit} className={styles.form}>
                         <input className={styles.input} type="text" onChange={handleEditedPlaylistNameChange} value={stateEditedPlaylistName} placeholder="e.g. 'Road Trip'"></input>
                         <button className={styles.button} type="submit">Save Name</button>
                     </form>
@@ -26,9 +26,9 @@ export default function RightColumn( {statePlaylistTracks, stateSavedPlaylistNam
             );
         } else {
             playlistHeading = (
-                <div className={styles.playlistHeading}>
+                <div className={styles.playlistHeadingNamed}>
                     <h2>{stateSavedPlaylistName}</h2>
-                    <p onClick={handlePlaylistEditClick}>✏️</p>
+                    <button onClick={handlePlaylistEditClick} className={styles.editButton}>✏️</button>
                 </div>
             );
         }
@@ -36,7 +36,7 @@ export default function RightColumn( {statePlaylistTracks, stateSavedPlaylistNam
         playlistHeading = (
             <div className={styles.playlistHeading}>
                 <h2>Rename Your Playlist:</h2>
-                <form onSubmit={handlePlaylistNameFormSubmit}>
+                <form onSubmit={handlePlaylistNameFormSubmit} className={styles.form}>
                     <input className={styles.input} type="text" onChange={handleEditedPlaylistNameChange} value={stateEditedPlaylistName}></input>
                     <button className={styles.button} type="submit">Save Name</button>
                 </form>

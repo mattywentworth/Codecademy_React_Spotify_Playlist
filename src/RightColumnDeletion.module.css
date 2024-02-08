@@ -5,8 +5,11 @@
     background-color: transparent;
     position: sticky;
     top: 0;
-    z-index: 1;
-    margin: 1rem;
+    /*z-index: 1;*/
+    padding: 1rem;
+    width: 100%;
+    color: white;
+    background-color: maroon;
 }
 
 .button {
@@ -20,6 +23,6 @@
 }
 
 button:hover {
-    background-color: #1FD563;
-    border: 2px solid #1FD563;
+    background-color: gold;
+    border: 2px solid gold;
 }

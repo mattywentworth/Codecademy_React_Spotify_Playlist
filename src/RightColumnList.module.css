@@ -3,14 +3,15 @@
 .divWrapper {
     background-color: transparent;
     width: 90%;
-    height: 90%;
+    height: 75vh;
     margin: 0 auto;
     overflow: scroll;
 }
 
 .divListWrapper {
+    /*height: 80vh;*/
     margin-top: 1rem;
-    margin-bottom: 2rem;
+    /*margin-bottom: 2rem;*/
 }
 
 .divListItemWrapper {
@@ -47,16 +48,28 @@
     padding: 0.5rem;
     background-color: black;
     text-align: left;
-    border: 2px solid gray;
+    border: 2px solid darkslategrey;
+    color: lightgrey
 }
 
 .img {
-    width: 10%;
+    width: 12%;
 }
 
 .trackInfo {
     width: 80%;
     padding: 0 0.5rem;
+    margin-left: 1.5rem;
+}
+
+.ttitle {
+    font-weight: bold;
+    text-align: right;
+}
+
+.tdetail {
+    text-align: left;
+    padding-left: 0.5rem;
 }
 
 .removeButton {
