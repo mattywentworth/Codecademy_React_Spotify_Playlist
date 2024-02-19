@@ -5,6 +5,8 @@
     height: 10vh;
     width: 100%;
     background-color: black;
+    font-family: 'Quicksand';
+    font-weight: 700;
     /*border-bottom: 2px solid gray;*/
 }
 

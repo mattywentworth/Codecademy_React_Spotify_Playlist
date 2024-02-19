@@ -13,22 +13,24 @@ export default function RightColumnList( {statePlaylistTracks, children, handleS
             <div className={styles.divListWrapper} id="playlist-tracks">
                 {statePlaylistTracks.map((track) => {
                     return (
-                        <div className={styles.track} >
+                        <div className={styles.track} key={track.id}>
                             <img src={track.imgAlbum} className={styles.img}/>
                             <div className={styles.trackInfo}>
                                 <table>
-                                    <tr>
-                                        <td className={styles.ttitle}>Track:</td>
-                                        <td className={styles.tdetail}>{track.nameTrack}</td>
-                                    </tr>
-                                    <tr>
-                                        <td className={styles.ttitle}>Artist:</td>
-                                        <td className={styles.tdetail}>{track.nameArtist}</td>
-                                    </tr>
-                                    <tr>
-                                        <td className={styles.ttitle}>Album:</td>
-                                        <td className={styles.tdetail}>{track.nameAlbum}</td>
-                                    </tr>
+                                    <tbody>
+                                        <tr>
+                                            <td className={styles.ttitle}>Track:</td>
+                                            <td className={styles.tdetail}>{track.nameTrack}</td>
+                                        </tr>
+                                        <tr>
+                                            <td className={styles.ttitle}>Artist:</td>
+                                            <td className={styles.tdetail}>{track.nameArtist}</td>
+                                        </tr>
+                                        <tr>
+                                            <td className={styles.ttitle}>Album:</td>
+                                            <td className={styles.tdetail}>{track.nameAlbum}</td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                             <button onClick={handleSelectionForDeletion} className={styles.removeButton} id={track.id}>-</button>

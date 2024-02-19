@@ -4,6 +4,7 @@ import LeftColumn from './LeftColumn';
 import RightColumn from './RightColumn';
 import './App.css';
 import spotifyApiCall from './SpotifyAPICall';
+import spotifyGetUsername from './SpotifyGetUsername';
 //import { sampleTracksArray } from './SampleTracksArray'; Putting this in place may be a waste of time. Just figure out the API work
 
 /*
@@ -22,6 +23,9 @@ function App() {
   const [editing, setEditing] = useState(false);
   const [tracksToDelete, setTracksToDelete] = useState([]);
   const [apiReturn, setApiReturn] = useState([]);
+  const [userAuthorized, setUserAuthorized] =  useState(false);
+  const [usernameID, setUsernameID] = useState(null);
+  const [userAccessToken, setUserAccessToken] = useState(null);
   //I think there will be an issue of needing to reset the value of 'input' to an empty string after form is submitted. It needs to equal only what is typed in input field
   
 
@@ -52,10 +56,16 @@ function App() {
     setApiReturn(spotifyApiReturn);
   }
 
+  //Handling calling Spotify's API after authorization in order to get the username ID
+  const handleGetUsernameID = async () => {
+    const userName = await spotifyGetUsername(userAccessToken);
+    setUsernameID(userName);
+  }
+
   //Handling adding a song result to the playlist and preventing a song from being added twice
   const handleAddToPlaylistClick = (e) => {
     if (playlistTracks.find(track => track.id == e.target.getAttribute('idtrack')) == undefined) {
-      setPlaylistTracks((prev) => [{id: e.target.getAttribute('idtrack'), nameTrack: e.target.getAttribute('nametrack'), nameAlbum: e.target.getAttribute('namealbum'), nameArtist: e.target.getAttribute('nameartist'), imgAlbum: e.target.getAttribute('imgalbum')}, ...prev]);
+      setPlaylistTracks((prev) => [{id: e.target.getAttribute('idtrack'), nameTrack: e.target.getAttribute('nametrack'), nameAlbum: e.target.getAttribute('namealbum'), nameArtist: e.target.getAttribute('nameartist'), imgAlbum: e.target.getAttribute('imgalbum'), uriTrack: e.target.getAttribute('uritrack')}, ...prev]);
     };
   }
 
@@ -130,12 +140,58 @@ function App() {
       document.getElementById('test-header').style.display = 'none';
     };
   })
-  
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.hash.substring(1));
+    const authAccessToken = params.get('access_token');
+    setUserAccessToken(authAccessToken);
+    
+    if (authAccessToken) { //This probably isn't necessary. Just have some logic for if userAccessToken exists?
+      setUserAuthorized(true);
+      /*const userName = spotifyGetUsername(userAccessToken);
+      setUsernameID(userName);*/
+    }
+  })
+
+  //Use useEffect to get spotifyGetUsername, and store it in state - ALONG WITH EXPIRATION DATE FUNCTIONALITY
+
+  /*
+  useEffect(() => {
+    //grab the access  token from the # in the url, store it in state, use that state to call Spotify API to get  users user_id
+
+    if (userAuthorized == true) {
+      //use imported API call to get spotify username of authorized user_id
+      const userID = spotifyGetUsername(userAccessToken);
+      setUsernameID(userID);
+    }
+  }, [userAuthorized])
+  */
+
+  /*
+  let jsxMain;
+  if (userAuthorized == false) {
+    jsxMain = <button>Log In to Spotify to Create Playlist</button> 
+  } else {
+    (
+      <main className="Main">
+          <LeftColumn handleInputChange={handleInputChange} stateInput={input} handleFormSubmitAPI={handleFormSubmitAPI} apiReturn={apiReturn} handleAddToPlaylistClick={handleAddToPlaylistClick}/>
+          <RightColumn stateSavedPlaylistName={savedPlaylistName} handleEditedPlaylistNameChange={handleEditedPlaylistNameChange} handlePlaylistNameFormSubmit={handlePlaylistNameFormSubmit} statePlaylistTracks={playlistTracks} truthyEditing={truthyEditing} stateEditing={editing} handleSelectionForDeletion={handleSelectionForDeletion} numOfTracksToDelete={numOfTracksToDelete} handleDeletion={handleDeletion} handleAbandonDelete={handleAbandonDelete} />
+      </main>
+    );
+  }
+  */
+  /*
+  PRESERVED MAIN ELEMENT
+  <main className="Main">
+        <LeftColumn handleInputChange={handleInputChange} stateInput={input} handleFormSubmitAPI={handleFormSubmitAPI} apiReturn={apiReturn} handleAddToPlaylistClick={handleAddToPlaylistClick}/>
+        <RightColumn stateSavedPlaylistName={savedPlaylistName} handleEditedPlaylistNameChange={handleEditedPlaylistNameChange} handlePlaylistNameFormSubmit={handlePlaylistNameFormSubmit} statePlaylistTracks={playlistTracks} truthyEditing={truthyEditing} stateEditing={editing} handleSelectionForDeletion={handleSelectionForDeletion} numOfTracksToDelete={numOfTracksToDelete} handleDeletion={handleDeletion} handleAbandonDelete={handleAbandonDelete} />
+  </main>
+  */
 
   return (
     <div className="App">
       <header>
-        <Header statePlaylistTracks={playlistTracks} statePlaylistName={savedPlaylistName}/>
+        <Header statePlaylistTracks={playlistTracks} statePlaylistName={savedPlaylistName} stateUsername={usernameID} stateUserAuthorized={userAuthorized} handleGetUsernameID={handleGetUsernameID} stateUserAccessToken={userAccessToken} funcGetUsername={spotifyGetUsername}/>
       </header>
       <main className="Main">
         <LeftColumn handleInputChange={handleInputChange} stateInput={input} handleFormSubmitAPI={handleFormSubmitAPI} apiReturn={apiReturn} handleAddToPlaylistClick={handleAddToPlaylistClick}/>

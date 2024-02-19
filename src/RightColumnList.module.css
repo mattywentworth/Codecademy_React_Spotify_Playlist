@@ -1,6 +1,8 @@
 /* Will need to come in and clean this up */
 
 .divWrapper {
+    display: flex;
+    flex-direction: column;
     background-color: transparent;
     width: 90%;
     height: 75vh;
@@ -19,7 +21,7 @@
     justify-content: space-between;
     position: relative; /* Why couldn't I just set margin to separate these div list items from the divWrapper? */
     top: 1rem;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     margin-bottom: 0.5rem;
     padding: 1rem;
@@ -44,7 +46,7 @@
     justify-content: space-between;
     align-items: center;
     width: 90%;
-    margin: 1rem;
+    margin: 1rem auto;
     padding: 0.5rem;
     background-color: black;
     text-align: left;

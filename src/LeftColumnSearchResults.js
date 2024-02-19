@@ -58,21 +58,23 @@ export default function LeftColumnSearchResults( {apiReturn, handleAddToPlaylist
                         <img src={track.album.images[1].url} className={styles.img}/>
                         <div className={styles.trackInfo}>
                             <table>
-                                <tr>
-                                    <td className={styles.ttitle}>Track:</td>
-                                    <td className={styles.tdetail}>{track.name}</td>
-                                </tr>
-                                <tr>
-                                    <td className={styles.ttitle}>Artist:</td>
-                                    <td className={styles.tdetail}>{track.artists[0].name}</td>
-                                </tr>
-                                <tr>
-                                    <td className={styles.ttitle}>Album:</td>
-                                    <td className={styles.tdetail}>{track.album.name}</td>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <td className={styles.ttitle}>Track:</td>
+                                        <td className={styles.tdetail}>{track.name}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className={styles.ttitle}>Artist:</td>
+                                        <td className={styles.tdetail}>{track.artists[0].name}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className={styles.ttitle}>Album:</td>
+                                        <td className={styles.tdetail}>{track.album.name}</td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
-                        <button onClick={handleAddToPlaylistClick} className={styles.addButton} name={track.name} nametrack={track.name} namealbum={track.album.name} nameartist={track.artists[0].name} imgalbum={track.album.images[1].url} idtrack={track.id}>+</button>
+                        <button onClick={handleAddToPlaylistClick} className={styles.addButton} name={track.name} nametrack={track.name} namealbum={track.album.name} nameartist={track.artists[0].name} imgalbum={track.album.images[1].url} idtrack={track.id} uritrack={track.uri}>+</button>
                     </div>
                 )
             })}
