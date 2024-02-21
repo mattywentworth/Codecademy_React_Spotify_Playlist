@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Header.module.css';
 
-export default function Header( {statePlaylistName, statePlaylistTracks, stateUsername, stateUserAuthorized, handleGetUsernameID, stateUserAccessToken, funcGetUsername} ) {
+export default function Header( {statePlaylistName, statePlaylistTracks, stateUsername, stateUserAuthorized, handleGetUsernameID, stateUserAccessToken, funcGetUsername, handleCreatePlaylist} ) {
 
     var client_id = '954d475f59ed4224ac3b1c9ee5230229';
     var redirect_uri = 'http://localhost:3000';
@@ -9,7 +9,7 @@ export default function Header( {statePlaylistName, statePlaylistTracks, stateUs
     //var state = generateRandomString(16);
 
     //localStorage.setItem(stateKey, state);
-    var scope = 'user-read-private user-read-email playlist-modify-private';
+    var scope = 'user-read-private user-read-email playlist-modify-private playlist-modify-public';
 
     var url = 'https://accounts.spotify.com/authorize';
     url += '?response_type=token';
@@ -53,7 +53,7 @@ export default function Header( {statePlaylistName, statePlaylistTracks, stateUs
                 <h1>Make a Spotify Playlist</h1>
             </div>
             <div className={styles.divRight}>
-                {stateUserAuthorized == false ? <button onClick={handleAuth} className={styles.button} id="test-header">Log In To Spotify</button> : <button onClick={handleGetUsernameID} className={styles.button} id="test-header">Save Playlist to Spotify</button> }
+                {stateUserAuthorized == false ? <button onClick={handleAuth} className={styles.button} id="test-header">Log In To Spotify</button> : <button onClick={handleCreatePlaylist} className={styles.button} id="test-header">Save Playlist to Spotify</button> }
             </div>
         </div>
     );

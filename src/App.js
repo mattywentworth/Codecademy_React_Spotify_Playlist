@@ -5,6 +5,7 @@ import RightColumn from './RightColumn';
 import './App.css';
 import spotifyApiCall from './SpotifyAPICall';
 import spotifyGetUsername from './SpotifyGetUsername';
+import spotifyCreatePlaylist from './SpotifyCreatePlaylist';
 //import { sampleTracksArray } from './SampleTracksArray'; Putting this in place may be a waste of time. Just figure out the API work
 
 /*
@@ -60,6 +61,14 @@ function App() {
   const handleGetUsernameID = async () => {
     const userName = await spotifyGetUsername(userAccessToken);
     setUsernameID(userName);
+  }
+  //Commenting out previous 4 lines in order to maintain what was working before creating func to Create Spotify Playlist
+  //Handling calling Spotify's API after authorization in order to create the playlist
+  const handleCreatePlaylist = async () => {
+    const userName = await spotifyGetUsername(userAccessToken);
+    setUsernameID(userName);
+    const playlistID = await spotifyCreatePlaylist(userName, userAccessToken, savedPlaylistName);
+    
   }
 
   //Handling adding a song result to the playlist and preventing a song from being added twice
@@ -191,7 +200,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <Header statePlaylistTracks={playlistTracks} statePlaylistName={savedPlaylistName} stateUsername={usernameID} stateUserAuthorized={userAuthorized} handleGetUsernameID={handleGetUsernameID} stateUserAccessToken={userAccessToken} funcGetUsername={spotifyGetUsername}/>
+        <Header statePlaylistTracks={playlistTracks} statePlaylistName={savedPlaylistName} stateUsername={usernameID} stateUserAuthorized={userAuthorized} handleGetUsernameID={handleGetUsernameID} stateUserAccessToken={userAccessToken} funcGetUsername={spotifyGetUsername} handleCreatePlaylist={handleCreatePlaylist}/>
       </header>
       <main className="Main">
         <LeftColumn handleInputChange={handleInputChange} stateInput={input} handleFormSubmitAPI={handleFormSubmitAPI} apiReturn={apiReturn} handleAddToPlaylistClick={handleAddToPlaylistClick}/>
