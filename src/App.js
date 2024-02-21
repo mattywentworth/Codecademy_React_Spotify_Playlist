@@ -5,7 +5,7 @@ import RightColumn from './RightColumn';
 import './App.css';
 import spotifyApiCall from './SpotifyAPICall';
 import spotifyGetUsername from './SpotifyGetUsername';
-import spotifyCreatePlaylist from './SpotifyCreatePlaylist';
+import {spotifyCreatePlaylist, spotifyAddSongsToPlaylist} from './SpotifyCreatePlaylist';
 //import { sampleTracksArray } from './SampleTracksArray'; Putting this in place may be a waste of time. Just figure out the API work
 
 /*
@@ -68,6 +68,7 @@ function App() {
     const userName = await spotifyGetUsername(userAccessToken);
     setUsernameID(userName);
     const playlistID = await spotifyCreatePlaylist(userName, userAccessToken, savedPlaylistName);
+    const confirmation = await spotifyAddSongsToPlaylist(playlistID, userAccessToken, playlistTracks);//What needs to be returned?
     
   }
 
