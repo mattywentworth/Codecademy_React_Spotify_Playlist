@@ -63,13 +63,14 @@ export default function Header( {statePlaylistName, statePlaylistTracks, stateUs
         <div className={styles.divWrapper}>
             <div className={styles.divLeft}>
                 {authMessage}
-                <p id="auth-alert"></p>
+                
             </div>
             <div className={styles.divCenter}>
                 <h1>Make a Spotify Playlist</h1>
             </div>
             <div className={styles.divRight}>
                 {button}
+                <p id="auth-alert"></p>
             </div>
         </div>
     );
