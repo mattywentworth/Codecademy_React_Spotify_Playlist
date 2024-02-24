@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Header.module.css';
 
-export default function Header( {statePlaylistName, statePlaylistTracks, stateUsername, stateUserAuthorized, handleGetUsernameID, stateUserAccessToken, funcGetUsername, handleCreatePlaylist} ) {
+export default function Header( {statePlaylistName, statePlaylistTracks, stateUsername, stateUserAuthorized, handleGetUsernameID, stateUserAccessToken, funcGetUsername, handleCreatePlaylist, stateSetAuthExpired, stateAuthTimeRemaining} ) {
 
     var client_id = '954d475f59ed4224ac3b1c9ee5230229';
     var redirect_uri = 'http://localhost:3000';
@@ -30,7 +30,15 @@ export default function Header( {statePlaylistName, statePlaylistTracks, stateUs
         if (window.location.hash) {
         } else {
             window.location = url;
+            //document.getElementById("main-main").style.display = 'flex';
         };
+    }
+
+    let authMessage;
+    if (stateAuthTimeRemaining >= 1) {
+        authMessage = <p>Account reauthorization required in: {stateAuthTimeRemaining} minutes</p>
+    } else if (stateAuthTimeRemaining == null || stateAuthTimeRemaining < 1) {
+        authMessage = <p></p>
     }
 
     /*
@@ -44,16 +52,24 @@ export default function Header( {statePlaylistName, statePlaylistTracks, stateUs
       }
     */
 
+    let button;
+    if (stateUserAuthorized == false) {
+        button = <button onClick={handleAuth} className={styles.button} id="test-header">Authorize Spotify Account + Build Playlist</button>
+    } else if (stateUserAuthorized == true && statePlaylistTracks.length > 0 && statePlaylistName) {
+        button = <button onClick={handleCreatePlaylist} className={styles.button} id="test-header">Save Playlist to Spotify</button>
+    }
+
     return (
         <div className={styles.divWrapper}>
             <div className={styles.divLeft}>
-                <div>{stateUsername}</div>
+                {authMessage}
+                <p id="auth-alert"></p>
             </div>
             <div className={styles.divCenter}>
                 <h1>Make a Spotify Playlist</h1>
             </div>
             <div className={styles.divRight}>
-                {stateUserAuthorized == false ? <button onClick={handleAuth} className={styles.button} id="test-header">Log In To Spotify</button> : <button onClick={handleCreatePlaylist} className={styles.button} id="test-header">Save Playlist to Spotify</button> }
+                {button}
             </div>
         </div>
     );

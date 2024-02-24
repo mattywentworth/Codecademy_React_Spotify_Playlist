@@ -27,6 +27,10 @@ function App() {
   const [userAuthorized, setUserAuthorized] =  useState(false);
   const [usernameID, setUsernameID] = useState(null);
   const [userAccessToken, setUserAccessToken] = useState(null);
+  const [authExpired, setAuthExpired] = useState(true);//expiration
+  const [authExpirationPeriod, setAuthExpirationPeriod] = useState(null);
+  const [authTimeRemaining, setAuthTimeRemaining] = useState(null);
+  const [authExpirationTime, setAuthExpirationTime] = useState(null);
   //I think there will be an issue of needing to reset the value of 'input' to an empty string after form is submitted. It needs to equal only what is typed in input field
   
 
@@ -68,7 +72,7 @@ function App() {
     const userName = await spotifyGetUsername(userAccessToken);
     setUsernameID(userName);
     const playlistID = await spotifyCreatePlaylist(userName, userAccessToken, savedPlaylistName);
-    const confirmation = await spotifyAddSongsToPlaylist(playlistID, userAccessToken, playlistTracks);//What needs to be returned?
+    const confirmation = await spotifyAddSongsToPlaylist(playlistID, userAccessToken, playlistTracks, savedPlaylistName);//What needs to be returned?
     
   }
 
@@ -143,6 +147,7 @@ function App() {
     };
   }, [tracksToDelete])
 
+  /*
   useEffect(() => {
     if (playlistTracks.length > 0 && savedPlaylistName) {
       document.getElementById('test-header').style.display = 'block';
@@ -150,6 +155,7 @@ function App() {
       document.getElementById('test-header').style.display = 'none';
     };
   })
+  */
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.hash.substring(1));
@@ -158,10 +164,54 @@ function App() {
     
     if (authAccessToken) { //This probably isn't necessary. Just have some logic for if userAccessToken exists?
       setUserAuthorized(true);
+      const implicitGrantExpirationPeriod = params.get('expires_in');
+      setAuthExpirationPeriod(parseInt(implicitGrantExpirationPeriod) / 60);
+      const expirationPeriodInMs = parseInt(implicitGrantExpirationPeriod) * 1000;
+      setAuthExpirationTime(Date.now() + parseInt(implicitGrantExpirationPeriod));
+      document.getElementById('auth-alert').style.color = 'gold';
+      document.getElementById('auth-alert').innerHTML = `Page will refresh to re-authorize your account in ${parseInt(implicitGrantExpirationPeriod) / 60} minutes.`;
+      setTimeout(() => document.getElementById('auth-alert').innerHTML = '', 10000);
+      setTimeout(() => window.location.href = window.location.href.split('#')[0], expirationPeriodInMs);
+      
+      //figure oout a way to set userAuthorized to false after 60 minutes
+
       /*const userName = spotifyGetUsername(userAccessToken);
       setUsernameID(userName);*/
     }
+    /*const implicitGrantExpirationPeriod = params.get('expires_in');
+    setAuthExpirationPeriod(parseInt(implicitGrantExpirationPeriod) / 60);*/
+  }, [])
+
+  
+  useEffect(() => {
+    if(userAuthorized == false) {
+      document.getElementById('main-main').style.display = 'none';
+    } else {
+      document.getElementById('main-main').style.display = 'flex';
+    }
+  }, [userAuthorized])//Is this correct? Not having it will cause too many re-renders?
+
+  /*
+  useEffect(() => {
+    setAuthTimeRemaining(authExpirationPeriod);
+    const timeoutOne = setInterval(() => {
+        setAuthTimeRemaining(prev => prev -= 1);
+    }, 100);
+    return () =>  clearInterval(timeoutOne); //Trying to create a clock that will count down based on the orginal auth expiration time value
+  }, [authExpirationPeriod])
+  */
+  /*
+  useEffect(() => {
+    if (authTimeRemaining == 0) {
+      window.location.href = window.location.origin;
+    }
   })
+  */
+  /*useEffect(() => {
+    if (authTimeRemaining < 1) {
+      setAuthTimeRemaining(null);
+    }
+  })*/
 
   //Use useEffect to get spotifyGetUsername, and store it in state - ALONG WITH EXPIRATION DATE FUNCTIONALITY
 
@@ -201,9 +251,9 @@ function App() {
   return (
     <div className="App">
       <header>
-        <Header statePlaylistTracks={playlistTracks} statePlaylistName={savedPlaylistName} stateUsername={usernameID} stateUserAuthorized={userAuthorized} handleGetUsernameID={handleGetUsernameID} stateUserAccessToken={userAccessToken} funcGetUsername={spotifyGetUsername} handleCreatePlaylist={handleCreatePlaylist}/>
+        <Header statePlaylistTracks={playlistTracks} statePlaylistName={savedPlaylistName} stateUsername={usernameID} stateUserAuthorized={userAuthorized} handleGetUsernameID={handleGetUsernameID} stateUserAccessToken={userAccessToken} funcGetUsername={spotifyGetUsername} handleCreatePlaylist={handleCreatePlaylist} stateSetAuthExpired={setAuthExpired} stateAuthTimeRemaining={authTimeRemaining}/>
       </header>
-      <main className="Main">
+      <main className="Main" id="main-main">
         <LeftColumn handleInputChange={handleInputChange} stateInput={input} handleFormSubmitAPI={handleFormSubmitAPI} apiReturn={apiReturn} handleAddToPlaylistClick={handleAddToPlaylistClick}/>
         <RightColumn stateSavedPlaylistName={savedPlaylistName} handleEditedPlaylistNameChange={handleEditedPlaylistNameChange} handlePlaylistNameFormSubmit={handlePlaylistNameFormSubmit} statePlaylistTracks={playlistTracks} truthyEditing={truthyEditing} stateEditing={editing} handleSelectionForDeletion={handleSelectionForDeletion} numOfTracksToDelete={numOfTracksToDelete} handleDeletion={handleDeletion} handleAbandonDelete={handleAbandonDelete} />
       </main>

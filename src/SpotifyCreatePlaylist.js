@@ -55,7 +55,7 @@ export const spotifyCreatePlaylist = async (user, accesstoken, playlistname) => 
     }
 }
 
-export const spotifyAddSongsToPlaylist = async (playlistid, accesstoken, playliststate) => {
+export const spotifyAddSongsToPlaylist = async (playlistid, accesstoken, playliststate, playlistname) => {
     const endpoint = `https://api.spotify.com/v1/playlists/${playlistid}/tracks?uris=`;
     const playlistURIs = playliststate.map(track => track.uriTrack);
     const playlistURIsToString = playlistURIs.toString();
@@ -75,7 +75,7 @@ export const spotifyAddSongsToPlaylist = async (playlistid, accesstoken, playlis
         });
         const data = await response.json();
         //return data.snapshot_id;
-        alert(`${convertedURIs} ... ${data.snapshot_id}... ${playlistid}... ${accesstoken}`);
+        alert(`${playlistname} has been saved to your Spotify account.`);
     } catch (error) {
         console.log(error);
     }
