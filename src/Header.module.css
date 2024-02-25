@@ -22,7 +22,23 @@
     width: 20%;
 }
 
-.button {
+.buttonAuth {
+    display: default; /* Change to none and have js handle dislay: default or whatever when the playlist has a name and when at least one song has been added */
+    background-color: inherit;
+    border: 2px solid hotpink;
+    color: hotpink;
+    border-radius: 50px;
+    font-size: 1.25rem;
+    padding: 0.5rem 1rem;
+}
+
+.buttonAuth:hover {
+    background-color: hotpink;
+    border: 2px solid hotpink;
+    color: black;
+}
+
+.buttonSave {
     display: default; /* Change to none and have js handle dislay: default or whatever when the playlist has a name and when at least one song has been added */
     background-color: inherit;
     border: 2px solid #1FD563;

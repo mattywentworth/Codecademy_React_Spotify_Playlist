@@ -54,19 +54,17 @@ export default function Header( {statePlaylistName, statePlaylistTracks, stateUs
 
     let button;
     if (stateUserAuthorized == false) {
-        button = <button onClick={handleAuth} className={styles.button} id="test-header">Authorize Spotify Account + Build Playlist</button>
+        button = <button onClick={handleAuth} className={styles.buttonAuth} id="test-header">Authorize Account + Build Playlist</button>
     } else if (stateUserAuthorized == true && statePlaylistTracks.length > 0 && statePlaylistName) {
-        button = <button onClick={handleCreatePlaylist} className={styles.button} id="test-header">Save Playlist to Spotify</button>
+        button = <button onClick={handleCreatePlaylist} className={styles.buttonSave} id="test-header">Save Playlist to Spotify</button>
     }
 
     return (
         <div className={styles.divWrapper}>
-            <div className={styles.divLeft}>
-                {authMessage}
-                
+            <div className={styles.divLeft}>                
             </div>
             <div className={styles.divCenter}>
-                <h1>Make a Spotify Playlist</h1>
+                <h1>Spotify Playlist Generator</h1>
             </div>
             <div className={styles.divRight}>
                 {button}
