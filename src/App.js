@@ -140,7 +140,7 @@ function App() {
         document.getElementById(track.id).style.backgroundColor = 'black';
       }
     };
-    if (playlistTracks.length >= 0 && tracksToDelete.length == 0) {
+    if (/*playlistTracks.length >= 0 &&*/ tracksToDelete.length == 0) {
       document.getElementById('delete-songs-div').style.display = 'none';
     } else if (playlistTracks.length > 0 && tracksToDelete.length != 0) {
       document.getElementById('delete-songs-div').style.display = 'flex';
@@ -168,21 +168,40 @@ function App() {
       setAuthExpirationPeriod(parseInt(implicitGrantExpirationPeriod) / 60);
       const expirationPeriodInMs = parseInt(implicitGrantExpirationPeriod) * 1000;
       setAuthExpirationTime(Date.now() + parseInt(implicitGrantExpirationPeriod));
-      document.getElementById('auth-alert').style.color = 'gold';
-      document.getElementById('auth-alert').innerHTML = `Page will refresh to re-authorize your account in ${parseInt(implicitGrantExpirationPeriod) / 60} minutes.`;
-      setTimeout(() => document.getElementById('auth-alert').innerHTML = '', 10000);
+      //Commenting out following 3 lines to preserve original code, but opting for an alert message instead
+      //document.getElementById('auth-alert').style.color = 'gold';
+      //document.getElementById('auth-alert').innerHTML = `Page will refresh to re-authorize your account in ${parseInt(implicitGrantExpirationPeriod) / 60} minutes.`;
+      //setTimeout(() => document.getElementById('auth-alert').innerHTML = '', 10000);
       setTimeout(() => window.location.href = window.location.href.split('#')[0], expirationPeriodInMs);
       
-      //figure oout a way to set userAuthorized to false after 60 minutes
-
-      /*const userName = spotifyGetUsername(userAccessToken);
-      setUsernameID(userName);*/
     }
     /*const implicitGrantExpirationPeriod = params.get('expires_in');
     setAuthExpirationPeriod(parseInt(implicitGrantExpirationPeriod) / 60);*/
   }, [])
 
+  //Beg of test to re-populate playlist generator with pre-auth work after auth
   
+  useEffect( () => {
+    if (sessionStorage.getItem('searchTerm')) {
+      setInput(sessionStorage.getItem('searchTerm'));
+      const apiReturnString = sessionStorage.getItem('apiReturn');
+      const parsedApiReturn = JSON.parse(apiReturnString);
+      setApiReturn(parsedApiReturn);
+      //setApiReturn(spotifyApiReturn);
+    }
+    if (sessionStorage.getItem('playlistName')) {
+      setSavedPlaylistName(sessionStorage.getItem('playlistName'));
+    }
+    if (sessionStorage.getItem('playlistTracks')) {
+      const appPlaylistTracks = sessionStorage.getItem('playlistTracks');
+      const parsedAppPlaylistTracks = JSON.parse(appPlaylistTracks);
+      setPlaylistTracks(parsedAppPlaylistTracks);
+    };
+  }, [userAuthorized])
+  
+  //End of test
+
+  /*
   useEffect(() => {
     if(userAuthorized == false) {
       document.getElementById('main-main').style.display = 'none';
@@ -190,7 +209,7 @@ function App() {
       document.getElementById('main-main').style.display = 'flex';
     }
   }, [userAuthorized])//Is this correct? Not having it will cause too many re-renders?
-
+  */
   /*
   useEffect(() => {
     setAuthTimeRemaining(authExpirationPeriod);
@@ -251,7 +270,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <Header statePlaylistTracks={playlistTracks} statePlaylistName={savedPlaylistName} stateUsername={usernameID} stateUserAuthorized={userAuthorized} handleGetUsernameID={handleGetUsernameID} stateUserAccessToken={userAccessToken} funcGetUsername={spotifyGetUsername} handleCreatePlaylist={handleCreatePlaylist} stateSetAuthExpired={setAuthExpired} stateAuthTimeRemaining={authTimeRemaining}/>
+        <Header statePlaylistTracks={playlistTracks} statePlaylistName={savedPlaylistName} stateUsername={usernameID} stateUserAuthorized={userAuthorized} handleGetUsernameID={handleGetUsernameID} stateUserAccessToken={userAccessToken} funcGetUsername={spotifyGetUsername} handleCreatePlaylist={handleCreatePlaylist} stateSetAuthExpired={setAuthExpired} stateAuthTimeRemaining={authTimeRemaining} stateInput={input} stateApiReturn={apiReturn}/>
       </header>
       <main className="Main" id="main-main">
         <LeftColumn handleInputChange={handleInputChange} stateInput={input} handleFormSubmitAPI={handleFormSubmitAPI} apiReturn={apiReturn} handleAddToPlaylistClick={handleAddToPlaylistClick}/>

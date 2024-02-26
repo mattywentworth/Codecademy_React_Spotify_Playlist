@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Header.module.css';
 
-export default function Header( {statePlaylistName, statePlaylistTracks, stateUsername, stateUserAuthorized, handleGetUsernameID, stateUserAccessToken, funcGetUsername, handleCreatePlaylist, stateSetAuthExpired, stateAuthTimeRemaining} ) {
+export default function Header( {stateInput, stateApiReturn, statePlaylistName, statePlaylistTracks, stateUsername, stateUserAuthorized, handleGetUsernameID, stateUserAccessToken, funcGetUsername, handleCreatePlaylist, stateSetAuthExpired, stateAuthTimeRemaining} ) {
 
     var client_id = '954d475f59ed4224ac3b1c9ee5230229';
     var redirect_uri = 'http://localhost:3000';
@@ -29,6 +29,15 @@ export default function Header( {statePlaylistName, statePlaylistTracks, stateUs
     const handleAuth = () => {
         if (window.location.hash) {
         } else {
+            //Beg of test to preserve pre-auth work
+            //use conditionals so that non-existen values for each of these don't override the default state values upon reload?
+            sessionStorage.setItem('searchTerm', stateInput);
+            const jsonApiReturn = JSON.stringify(stateApiReturn);
+            sessionStorage.setItem('apiReturn', jsonApiReturn);
+            sessionStorage.setItem('playlistName', statePlaylistName);
+            const jsonPlaylistTracks = JSON.stringify(statePlaylistTracks);
+            sessionStorage.setItem('playlistTracks', jsonPlaylistTracks);
+            //End of test to preserve pre-auth work
             window.location = url;
             //document.getElementById("main-main").style.display = 'flex';
         };
@@ -54,7 +63,7 @@ export default function Header( {statePlaylistName, statePlaylistTracks, stateUs
 
     let button;
     if (stateUserAuthorized == false) {
-        button = <button onClick={handleAuth} className={styles.buttonAuth} id="test-header">Authorize Account + Build Playlist</button>
+        button = <button onClick={handleAuth} className={styles.buttonAuth} id="test-header">Authorize My Spotify Account</button>
     } else if (stateUserAuthorized == true && statePlaylistTracks.length > 0 && statePlaylistName) {
         button = <button onClick={handleCreatePlaylist} className={styles.buttonSave} id="test-header">Save Playlist to Spotify</button>
     }
